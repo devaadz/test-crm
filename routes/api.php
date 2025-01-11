@@ -15,7 +15,8 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::middleware(['auth:api'])->group(function () {
     Route::get('/companies', [CompanyController::class, 'index']);
     Route::post('/companies', [CompanyController::class, 'store']);
-    Route::apiResource('employees', EmployeeController::class)->except(['show']);
+    Route::apiResource('employees', EmployeeController::class)->except(['show','destroy','delete']);
     Route::get('/employees/{employee}', [EmployeeController::class, 'show']);
+    Route::delete('/employees/{employee}', [EmployeeController::class, 'destroy']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });

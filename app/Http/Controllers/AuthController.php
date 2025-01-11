@@ -14,13 +14,11 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-        // Validasi input
         $request->validate([
             'email' => 'required|email',
             'password' => 'required|string',
         ]);
 
-        // Cek kredensial pengguna
         if (!$token = JWTAuth::attempt($request->only('email', 'password'))) {
             return response()->json(['message' => 'Kredensial tidak valid'], 401);
         }
